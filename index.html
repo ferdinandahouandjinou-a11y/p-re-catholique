@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="croire2.png" type="image/x-icon"
+    <!-- Polices Google & Icônes FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>vaticano.cattolico</title>
+    
+    <style>
+        /* ==========================================================================
+           RESET & STYLES DE BASE
+           ========================================================================== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #2b2b2b;
+            background-color: #fdfbf7;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, .font-heading {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ==========================================================================
+           BARRE DE NAVIGATION
+           ========================================================================== */
+        .top-bar {
+            background-color: #121212;
+            color: #d4af37;
+            font-size: 0.82rem;
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .top-bar-info span {
+            margin-right: 1.5rem;
+        }
+
+        .top-bar-info i {
+            margin-right: 0.4rem;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #d4af37;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #f3e5ab;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.8rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #f5f5f5;
+            font-size: 0.88rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.4rem 0;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #d4af37;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            color: #111 !important;
+            padding: 0.6rem 1.4rem !important;
+            border-radius: 4px;
+            font-weight: 700 !important;
+        }
+
+        .btn-nav::after {
+            display: none !important;
+        }
+
+        .btn-nav:hover {
+            background: linear-gradient(135deg, #f3e5ab, #d4af37);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ==========================================================================
+           SECTION HERO AVEC VIDÉO EN ARRIÈRE-PLAN
+           ========================================================================== */
+        .hero {
+            position: relative;
+            height: 92vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: -2;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+           
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 950px;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid #d4af37;
+            color: #f3e5ab;
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            color: #ffffff;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: #e0e0e0;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2.2rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #d4af37, #b38f28);
+            color: #111;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #f3e5ab, #d4af37);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-outline {
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #d4af37;
+            color: #d4af37;
+            transform: translateY(-3px);
+        }
+
+        /* ==========================================================================
+           SECTIONS GENERALES
+           ========================================================================== */
+        .section {
+            padding: 6rem 2rem;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+        }
+
+        .section-subtitle {
+            color: #8b0000;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '✠';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #d4af37;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 1.05rem;
+            margin-top: 1.5rem;
+        }
+
+        .bg-cream { background-color: #f7f3eb; }
+        .bg-white { background-color: #ffffff; }
+        .bg-dark { background-color: #161616; color: #f5f5f5; }
+        .bg-dark .section-title { color: #ffffff; }
+        .bg-dark .section-description { color: #bbb; }
+
+        /* ==========================================================================
+           GRILLES
+           ========================================================================== */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.8rem; }
+
+        /* ==========================================================================
+           SECTION BOURSE FAMILIALE DE SOLIDARITÉ (75 000 EURO/AN)
+           ========================================================================== */
+        .bourse-banner {
+            background: linear-gradient(135deg, #1c1008 0%, #3a0d0d 50%, #1a1a1a 100%);
+            border: 2px solid #d4af37;
+            border-radius: 12px;
+            padding: 3.5rem;
+            color: #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .bourse-banner::before {
+            content: '✠';
+            position: absolute;
+            right: -20px;
+            bottom: -40px;
+            font-size: 18rem;
+            color: rgba(212, 175, 55, 0.05);
+            font-family: 'Cinzel', serif;
+            pointer-events: none;
+        }
+
+        .bourse-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 2rem;
+        }
+
+        .bourse-badge {
+            background: #d4af37;
+            color: #111;
+            padding: 0.5rem 1.5rem;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .bourse-amount {
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #f3e5ab;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .bourse-amount span {
+            font-size: 1.2rem;
+            color: #d4af37;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+
+        .bourse-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .bourse-card {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 1.8rem;
+            border-radius: 8px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s;
+        }
+
+        .bourse-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .bourse-card i {
+            font-size: 2.2rem;
+            color: #d4af37;
+            margin-bottom: 1rem;
+        }
+
+        .bourse-card h3 {
+            color: #f3e5ab;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .bourse-card p {
+            color: #dddddd;
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           CARTES SPIRITUELLES ET D'IMAGERY
+           ========================================================================== */
+        .card-spirit {
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            border: 1px solid #f0e6d2;
+        }
+
+        .card-spirit:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card-spirit:hover .card-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(18, 18, 18, 0.85);
+            color: #d4af37;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 3px;
+            border-left: 3px solid #d4af37;
+        }
+
+        .card-body {
+            padding: 1.8rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-body p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* ==========================================================================
+           HORAIRES DES MESSES & CÉLÉBRATIONS
+           ========================================================================== */
+        .mass-card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 2.2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 5px solid #d4af37;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .mass-card.highlight {
+            background: #fffdf5;
+            border-top: 5px solid #8b0000;
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(139, 0, 0, 0.15);
+        }
+
+        .mass-icon {
+            width: 70px;
+            height: 70px;
+            background: #f7f3eb;
+            color: #8b0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 1.5rem auto;
+            border: 1px solid #e0d5c1;
+        }
+
+        .mass-card.highlight .mass-icon {
+            background: #8b0000;
+            color: #ffffff;
+        }
+
+        .mass-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+            color: #1a1a1a;
+        }
+
+        .mass-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .mass-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+        }
+
+        .mass-list li strong {
+            color: #8b0000;
+        }
+
+        /* ==========================================================================
+           GALERIE D'IMAGES DENSE (GRANDE GALERIE PHOTO)
+           ========================================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 260px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: #f3e5ab;
+            font-size: 1.1rem;
+        }
+
+        .gallery-overlay p {
+            color: #dddddd;
+            font-size: 0.85rem;
+        }
+
+        /* ==========================================================================
+           ESPACE VIDÉOS ET MEDIA
+           ========================================================================== */
+        .video-box {
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            border: 1px solid #333;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            color: #f3e5ab;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           TÉMOIGNAGES & CITATIONS
+           ========================================================================== */
+        .quote-box {
+            background: #ffffff;
+            border-left: 4px solid #d4af37;
+            padding: 2rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-box p {
+            font-style: italic;
+            color: #444;
+            font-size: 1.05rem;
+            margin-bottom: 1rem;
+        }
+
+        .quote-author {
+            font-weight: 700;
+            color: #8b0000;
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           FORMULAIRE DE CONTACT ET PIED DE PAGE
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-form {
+            background: #ffffff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border: 1px solid #e0d5c1;
+        }
+
+        .form-group {
+            margin-bottom: 1.4rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.4);
+        }
+
+        footer {
+            background-color: #0d0d0d;
+            color: #aaaaaa;
+            padding: 5rem 2rem 2rem 2rem;
+            border-top: 3px solid #d4af37;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .footer-col h3 {
+            color: #f3e5ab;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #d4af37;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: #d4af37;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: #222;
+            color: #d4af37;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #d4af37;
+            color: #111;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #222;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* ==========================================================================
+           RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .navbar {
+                padding: 1rem 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.6rem;
+            }
+            .bourse-banner {
+                padding: 2rem;
+            }
+            .bourse-amount {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                display: none;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section {
+                padding: 3.5rem 1.2rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HAUT DE PAGE INFORMATIONS -->
+    <div class="top-bar">
+        <div class="top-bar-info">
+            <span><i class="fas fa-map-marker-alt"></i> Place de la Cathédrale, Paris</span>
+            <span><i class="fas fa-phone"></i> +33 1 42 68 00 00</span>
+            <span><i class="fas fa-envelope"></i> contact@eglise-catholique.org</span>
+        </div>
+        <div>
+            <span><i class="fas fa-clock"></i> Sanctuaire Ouvert 07h00 - 20h00</span>
+        </div>
+    </div>
+
+    <!-- NAVIGATION PRINCIPALE -->
+    <header class="navbar">
+        <div class="logo">
+            <i class="fas fa-cross"></i>
+            <div>
+                <div style="font-family: 'Cinzel', serif; font-size: 1.2rem; line-height: 1;">ÉGLISE CATHOLIQUE</div>
+                <div style="font-size: 0.7rem; color: #aaa; font-family: 'Montserrat', sans-serif;">PAROISSE SAINT-SACREMENT</div>
+            </div>
+        </div>
+        <nav>
+
+            <ul class="nav-links">
+                <li><a href="#accueil" class="active">Accueil</a></li>
+                <li><a href="#mission">Notre Foi</a></li>
+                <li><a href="#bourse">Bourse Familiale</a></li>
+                <li><a href="#messes">Messes</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#videos">Médias</a></li>
+                <li><a href="#contact" class="btn-nav">Demande de Soutien</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECTION HERO AVEC VIDÉO EN ARRIÈRE-PLAN (AUTOPLAY) -->
+    <section id="accueil" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="video pour mon site.mp4" type="video/mp4">
+            Votre navigateur ne prend pas en charge la vidéo HTML5.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-badge"><i class="fas fa-dove"></i> Foi, Espérance & Charité</span>
+            <h1>Bienvenue dans la Maison du Seigneur & de la Fraternité</h1>
+            <p>« Aimez-vous les uns les autres comme je vous ai aimés. » — Jean 13:34. Une communauté vivante dédiée à la prière, à l'élévation spirituelle et au soutien fraternel des familles.</p>
+            <div class="hero-btns">
+                <a href="#bourse" class="btn btn-gold"><i class="fas fa-hand-holding-heart"></i> Bourse Familiale (75 000 €)</a>
+                <a href="#messes" class="btn btn-outline"><i class="fas fa-church"></i> Horaires des Messes</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION MISSION & VIE SPIRITUELLE -->
+    <section id="mission" class="section bg-cream">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Vie de Paroisse</span>
+                <h2 class="section-title">Notre Sanctuaire & Mission Spirituelle</h2>
+                <p class="section-description">Un lieu d'accueil, d'écoute et de prière où chaque fidèle trouve réconfort, paix intérieure et croissance dans la foi auprès de la communauté.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card-spirit">
+                    <div class="card-img-wrapper">
+                        <img src="Image vatican.webp" alt="Cathédrale Catholique">
+                        <span class="card-tag">LITURGIE</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Célébrations & Sacrements</h3>
+                        <p>Participez à la sainte Eucharistie, au baptême, à la confirmation et au sacrement de réconciliation pour nourrir votre âme au quotidien.</p>
+                    </div>
+                </div>
+
+                <div class="card-spirit">
+                    <div class="card-img-wrapper">
+                        <img src="choral.webp" alt="Intérieur Eglise Prière">
+                        <span class="card-tag">ADORATION</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Prière & Contemplation</h3>
+                        <p>Nos chapelles d'adoration eucharistique vous accueillent chaque jour pour des moments de silence céleste et de médiation profonde.</p>
+                    </div>
+                </div>
+
+                <div class="card-spirit">
+                    <div class="card-img-wrapper">
+                        <img src="Les jeune salut le pape Léon.webp" alt="Catéchèse et Jeunesse">
+                        <span class="card-tag">JEUNESSE</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Catéchèse & Éducation</h3>
+                        <p>Éveil à la foi pour les tout-petits, préparation à la première communion et accompagnement spirituel de la jeunesse.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION BOURSE FAMILIALE DE SOLIDARITÉ (75 000 EUROS / AN) -->
+    <section id="bourse" class="section bg-white">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">EUVRE CARITATIVE PASTORALE</span>
+                <h2 class="section-title">Soutien aux Familles & Bourse Annuelle</h2>
+                <p class="section-description">L'Église Catholique s'engage fermement auprès des foyers fidèles pour préserver la dignité, l'éducation des enfants et la stabilité de chaque famille chrétienne.</p>
+            </div>
+
+            <div class="bourse-banner">
+                <div class="bourse-header">
+                    <div>
+                        <span class="bourse-badge"><i class="fas fa-cross"></i> Programme d'Aide Paroissiale</span>
+                        <h2 style="font-size: 2.2rem; color: #ffffff; margin-top: 0.8rem; font-family: 'Cinzel', serif;">Bourse Familiale de Solidarité Catholique</h2>
+                        <p style="color: #ccc; margin-top: 0.5rem; max-width: 650px;">Un fonds d'entraide dédié au soutien financier complet des familles de fidèles traversant des épreuves ou engagées dans la vie chrétienne.</p>
+                    </div>
+                    <div class="bourse-amount">
+                        75.000 € <span>/ an par famille éligible</span>
+                    </div>
+                </div>
+
+                <div class="bourse-grid">
+                    <div class="bourse-card">
+                        <i class="fas fa-home"></i>
+                        <h3>Soutien Logement & Foyer</h3>
+                        <p>Prise en charge des charges essentielles du foyer pour garantir un environnement stable et paisible pour l'épanouissement des enfants.</p>
+                    </div>
+
+                    <div class="bourse-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Éducation & Bourses d'Études</h3>
+                        <p>Financement intégral de la scolarité dans les établissements catholiques et accès aux études supérieures pour les jeunes de la paroisse.</p>
+                    </div>
+
+                    <div class="bourse-card">
+                        <i class="fas fa-heartbeat"></i>
+                        <h3>Assistance Médicale & Urgences</h3>
+                        <p>Couverture des soins de santé exceptionnels et secours immédiat pour les familles confrontées à la maladie ou à l'imprévu.</p>
+                    </div>
+
+                    <div class="bourse-card">
+                        <i class="fas fa-praying-hands"></i>
+                        <h3>Accompagnement Pastoral</h3>
+                        <p>Un suivi personnalisé par les prêtres et diacres pour vous épauler à la fois spirituellement, moralement et matériellement.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="#contact" class="btn btn-gold" style="font-size: 1.1rem; padding: 1.1rem 2.8rem;">
+                        <i class="fas fa-paper-plane"></i> Soumettre une Demande de Bourse Familiale
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION HORAIRES DES MESSES ET SACREMENTS -->
+    <section id="messes" class="section bg-cream">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Prière Communautaire</span>
+                <h2 class="section-title">Horaires des Messes & Confessions</h2>
+                <p class="section-description">Rejoignez-nous chaque jour pour célébrer l'Eucharistie et renouveler votre foi autour de la table du Seigneur.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="mass-card">
+                    <div class="mass-icon"><i class="fas fa-sun"></i></div>
+                    <h3>Messes en Semaine</h3>
+                    <ul class="mass-list">
+                        <li><span>Lundi — Vendredi</span> <strong>07h30 & 18h30</strong></li>
+                        <li><span>Samedi Matin</span> <strong>08h30</strong></li>
+                        <li><span>Adoration Eucharistie</span> <strong>Jeudi à 19h00</strong></li>
+                        <li><span>Chapelet Paroissial</span> <strong>Chaque jour 17h45</strong></li>
+                    </ul>
+                </div>
+
+                <div class="mass-card highlight">
+                    <div class="mass-icon"><i class="fas fa-church"></i></div>
+                    <h3>Messes Dominicales</h3>
+                    <ul class="mass-list">
+                        <li><span>Samedi (Anticipée)</span> <strong>18h30</strong></li>
+                        <li><span>Dimanche Matin (Aube)</span> <strong>08h00</strong></li>
+                        <li><span>Grande Messe Solennelle</span> <strong>10h30</strong></li>
+                        <li><span>Messe des Jeunes</span> <strong>18h00</strong></li>
+                    </ul>
+                </div>
+
+                <div class="mass-card">
+                    <div class="mass-icon"><i class="fas fa-hands-praying"></i></div>
+                    <h3>Confessions & Écoute</h3>
+                    <ul class="mass-list">
+                        <li><span>Mercredi & Vendredi</span> <strong>17h00 — 18h15</strong></li>
+                        <li><span>Samedi</span> <strong>16h00 — 18h15</strong></li>
+                        <li><span>Sur Rendez-vous</span> <strong>Secrétariat</strong></li>
+                        <li><span>Accompagnement Spirituel</span> <strong>Prêtres</strong></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRANDE GALERIE PHOTO DU SANCTUAIRE -->
+    <section id="galerie" class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle" style="color: #d4af37;">PATRIMOINE & VIE PAROISSIALE</span>
+                <h2 class="section-title">Galerie Photos & Moments Sacrés</h2>
+                <p class="section-description">Découvrez en images la majesté de notre cathédrale, les célébrations liturgiques et les rassemblements de notre communauté.</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="Image01.jpg" alt="Autel de l'église">
+                    <div class="gallery-overlay">
+                        <h4>L'Autel Sacré</h4>
+                        <p>Le centre de la célébration eucharistique</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="image02.webp" alt="Fidèles en prière">
+                    <div class="gallery-overlay">
+                        <h4>Ferveur & Prière</h4>
+                        <p>Les fidèles réunis dans la foi</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="image3.jpeg" alt="Vitraux en lumière">
+                    <div class="gallery-overlay">
+                        <h4>Vitraux Historiques</h4>
+                        <p>La lumière divine à travers l'art sacré</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="image04.jpg" alt="Sainte Bible">
+                    <div class="gallery-overlay">
+                        <h4>La Parole de Dieu</h4>
+                        <p>La Sainte Bible, guide de nos vies</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="image05.jpg" alt="Bougies et Cierges">
+                    <div class="gallery-overlay">
+                        <h4>Cierges d'Intercession</h4>
+                        <p>Lumières déposées aux pieds de la Vierge Marie</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="image06.avif" alt=" Architecture Clocher">
+                    <div class="gallery-overlay">
+                        <h4>Le Clocher Solennel</h4>
+                        <p>Un symbole s'élevant vers le ciel</p>
+                    </div>
+                </div>
+
+                 <div class="gallery-item">
+                    <img src="image07.jpeg" alt="Autel de l'église">
+                    <div class="gallery-overlay">
+                        <h4>Communion</h4>
+                        <p>Le partage de la communion</p>
+                    </div>
+                </div>
+                 <div class="gallery-item">
+                    <img src="image08.png" alt="Autel de l'église">
+                    <div class="gallery-overlay">
+                        <h4>Sacrement</h4>
+                        <p>Le jour dU St sacrement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION VIDÉOS EN DIRECT & MEDIAS -->
+    <section id="videos" class="section bg-white">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">MÉDIAS & ENSEIGNEMENTS</span>
+                <h2 class="section-title">Espace Vidéo & Messes en Direct</h2>
+                <p class="section-description">Suivez nos célébrations dominicales à distance, écoutez les homélies et accédez aux enseignements spirituels de nos évêques.</p>
+            </div>
+
+            <div class="grid-2">
+                <div class="video-box">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.ktotv.com/" title="Messe Catholique en Direct" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3><i class="fas fa-broadcast-tower" style="color: #d4af37; margin-right: 0.5rem;"></i> Direct — Messe Dominicale Solennelle</h3>
+                        <p>Retransmission en direct chaque dimanche à 10h30. Rejoignez notre communauté universelle en communion spirituelle.</p>
+                    </div>
+                </div>
+
+                <div class="video-box">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.caritas.it/" title="Homélie et Méditation" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3><i class="fas fa-book-open" style="color: #d4af37; margin-right: 0.5rem;"></i> Enseignement — La Charité dans la Famille</h3>
+                        <p>Méditation approfondie sur le rôle des parents chrétiens et l'entraide fraternelle au sein de l'Église.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION TÉMOIGNAGES DE FIDÈLES -->
+    <section class="section bg-cream">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">FRATERNITÉ & ACTIONS</span>
+                <h2 class="section-title">Témoignages de nos Familles</h2>
+            </div>
+
+            <div class="grid-2">
+                <div class="quote-box">
+                    <p>« Grâce à la bénédiction de la communauté et au programme de la Bourse Familiale de Solidarité, notre foyer a pu surmonter une épreuve financière difficile et offrir une scolarité épanouissante à nos trois enfants. Que Dieu bénisse l'Église ! »</p>
+                    <div class="quote-author">— Famille Morel, Paroissiens depuis 12 ans</div>
+                </div>
+
+                <div class="quote-box">
+                    <p>« La messe quotidienne et l'accueil chaleureux des prêtres ont transformé notre vie de couple. C'est une vraie grâce de faire partie d'une paroisse aussi dynamique et généreuse envers les fidèles. »</p>
+                    <div class="quote-author">— Jean & Marie-Therèse, Fidèles engagés</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULAIRE DE CONTACT ET INSCRIPTION BOURSE -->
+    <section id="contact" class="section bg-white">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">COMMUNIQUER AVEC LA PAROISSE</span>
+                <h2 class="section-title">Inscriptions, Demandes & Contact</h2>
+                <p class="section-description">Remplissez ce formulaire pour nous adresser vos intentions de messe, demande de **bourse familiale catholique de Rome (Italie)**, d'un montant maximum de **75 000 € par an**, pour soutenir les familles éligibles. ou toute question spirituelle.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-form">
+                    <h3 style="font-family: 'Cinzel', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: #8b0000;">
+                        <i class="fas fa-envelope-open-text"></i> Formulaire de Demande
+                    </h3>
+                    <form onsubmit="event.preventDefault(); alert('Votre message a été transmis avec succès au Secrétariat Paroissial.');">
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input type="text" id="name" class="form-control" placeholder="Ex: M. et Mme Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse E-mail *</label>
+                            <input type="email" id="email" class="form-control" placeholder="exemple@domaine.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Numéro de Téléphone *</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="+33 6 00 00 00 00" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Objet de votre demande *</label>
+                            <select id="subject" class="form-control" required>
+                                <option value="">-- Sélectionnez un objet --</option>
+                                <option value="bourse">Demande de Bourse Familiale (75 000 €)</option>
+                                <option value="messe"> Demande de messe pour un défunt 10-20 € (Orffrendre)</option>
+                                <option value="sacrement">Confession d'un péché</option>
+                                <option value="ecoute">Rendez-vous avec un Prêtre</option>
+                            </select>
+                              <div class="form-group">
+                            <label for="photo">Importer une photo d'identité :</label>
+
+                            <!-- Champ d'import de fichier -->
+                            <input 
+                                type="file" 
+                                id="photo" 
+                                name="user_photo" 
+                                accept="image/png, image/jpeg, image/webp"
+                                required
+                            >
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Votre Message / Situation familiale *</label>
+                            <textarea id="message" class="form-control" rows="5" placeholder="Décrivez votre situation et vos besoins..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center;">
+                            <i class="fas fa-paper-plane"></i> Envoyer la demande au Secrétariat
+                        </button>
+                    </form>
+                </div>
+
+                <div style="display: flex; flex-direction: column; justify-content: space-between;">
+                    <div style="background: #121212; color: #ffffff; padding: 2.5rem; border-radius: 10px; border-left: 5px solid #d4af37;">
+                        <h3 style="color: #f3e5ab; font-size: 1.4rem; margin-bottom: 1.5rem;">
+                            <i class="fas fa-church"></i> Secrétariat Paroissial
+                        </h3>
+                        <p style="margin-bottom: 1.2rem;"><i class="fas fa-map-marker-alt" style="color: #d4af37; width: 25px;"></i> Piazza San Pietro, 00120 Città del Vaticano (Rome, Italie)</p>
+                        <p style="margin-bottom: 1.2rem;"><i class="fas fa-phone" style="color: #d4af37; width: 25px;"></i> +33 1 42 68 00 00</p>
+                        <p style="margin-bottom: 1.2rem;"><i class="fas fa-envelope" style="color: #d4af37; width: 25px;"></i> secretariat@eglise-catholique.org</p>
+                        <p style="margin-bottom: 1.2rem;"><i class="fas fa-clock" style="color: #d4af37; width: 25px;"></i> Lun - Sam : 09h00 - 18h00</p>
+                    </div>
+
+                    <div style="background: #f7f3eb; padding: 2rem; border-radius: 10px; margin-top: 1.5rem; border: 1px solid #e0d5c1;">
+                        <h4 style="color: #8b0000; font-size: 1.1rem; margin-bottom: 0.8rem;">
+                            <i class="fas fa-cross"></i> Intention de Prière Continue
+                        </h4>
+                        <p style="font-size: 0.9rem; color: #555;">Toutes les intentions déposées via le site sont portées dans la prière de nos communautés religieuses et lors de l'Eucharistie quotidienne.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PIED DE PAGE (FOOTER) -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>ÉGLISE CATHOLIQUE</h3>
+                    <p style="font-size: 0.9rem; color: #999; margin-bottom: 1.2rem;">Au service du Seigneur, de la foi universelle, de la charité évangélique et de l'épanouissement des familles chrétiennes.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Accès Rapide</h3>
+                    <ul class="footer-links">
+                        <li><a href="#accueil"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Accueil</a></li>
+                        <li><a href="#mission"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Notre Foi</a></li>
+                        <li><a href="#bourse"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Bourse Familiale (75 000 €)</a></li>
+                        <li><a href="#messes"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Horaires des Messes</a></li>
+                        <li><a href="#galerie"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Galerie Sanctuaire</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Actions Pastorales</h3>
+                    <ul class="footer-links">
+                        <li><a href="#sacrements"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Préparation aux Sacrements</a></li>
+                        <li><a href="#bourse"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Entraide & Solidarité</a></li>
+                        <li><a href="#videos"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Replay des Homélies</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right" style="font-size: 0.7rem; color: #d4af37;"></i> Secrétariat & Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Intention Solennelle</h3>
+                    <p style="font-size: 0.88rem; color: #aaa; font-style: italic;">« Que le Seigneur bénisse votre foyer et fasse briller sur vous sa grâce et sa paix. »</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Église Catholique — Paroisse Saint-Sacrement. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
